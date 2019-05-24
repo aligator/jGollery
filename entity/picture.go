@@ -4,7 +4,10 @@ import (
 	"code.gitea.io/gitea/modules/log"
 	"github.com/pkg/errors"
 	"jGollery/data"
+	"regexp"
 )
+
+var galleryRegexp = regexp.MustCompile("^[a-zA-Z0-9]+$")
 
 // interface for something which groups children beneath a path
 type PathGroup interface {
