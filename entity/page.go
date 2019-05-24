@@ -8,7 +8,7 @@ import (
 
 type Gallery struct {
 	//templ    template.Template
-	Pictures PictureFiles
+	Pictures PathGroup
 }
 
 func (g *Gallery) LoadPage(w http.ResponseWriter, r *http.Request) {

@@ -19,7 +19,7 @@ func Must(err error) {
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	var p = entity.Gallery{
-		Pictures: entity.PictureFiles{Path: "gallery/demo"},
+		Pictures: &entity.PictureFiles{Path: "gallery/demo"},
 	}
 	p.LoadPage(w, r)
 }

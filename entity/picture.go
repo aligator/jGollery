@@ -6,13 +6,13 @@ import (
 	"jGollery/data"
 )
 
-// interface for something which can provide names of children
-type ChildNameProvider interface {
+// interface for something which groups children beneath a path
+type PathGroup interface {
 	// get the parent's name
 	Name() string
-	// should return the names of all children
+	// returns the names of all children
 	GetList() ([]string, error)
-	// should return the full path for a child or "" if the child doesn't exist
+	// returns the full path for a child (parent name + child name) or error if the child doesn't exist
 	Get(name string) (string, error)
 }
 
