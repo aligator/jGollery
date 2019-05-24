@@ -29,7 +29,7 @@ func NewGallery(pictures PathGroup) (*Gallery, error) {
 
 	for _, pic := range pics {
 		if picPath, err := pictures.Get(pic); err == nil {
-			picPaths = append(picPaths, picPath)
+			picPaths = append(picPaths, "/"+picPath)
 		} else {
 			return nil, errors.Errorf("%s not found\n", pic)
 		}

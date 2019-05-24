@@ -7,7 +7,11 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", handler)
+	http.HandleFunc("/demo/", handler)
+
+	fs := http.FileServer(http.Dir("gallery/demo"))
+	http.Handle("/gallery/demo/", http.StripPrefix("/gallery/demo/", fs))
+
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
