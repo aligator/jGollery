@@ -1,25 +1,25 @@
 package main
 
 import (
-	"fmt"
 	"jGollery/entity"
+	"log"
+	"net/http"
 )
 
 func main() {
-
-	p := entity.PictureFiles{Path: "gallery/demo"}
-
-	pics, err := p.GetList()
-	Must(err)
-
-	for _, pic := range pics {
-		fmt.Println(p.Get(pic))
-	}
-
+	http.HandleFunc("/", handler)
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
 func Must(err error) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	var p = entity.Gallery{
+		Pictures: entity.PictureFiles{Path: "gallery/demo"},
+	}
+	p.LoadPage(w, r)
 }
