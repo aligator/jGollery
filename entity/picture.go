@@ -1,9 +1,9 @@
 package entity
 
 import (
-	"code.gitea.io/gitea/modules/log"
-	"github.com/pkg/errors"
+	"errors"
 	"jGollery/data"
+	"log"
 	"regexp"
 )
 
@@ -33,7 +33,7 @@ func (p *PictureFiles) GetList() ([]string, error) {
 		defer f.Close()
 		return f.Pictures()
 	} else {
-		log.Info("File could not be loaded.", p.Path, err)
+		log.Println("File could not be loaded.", p.Path, err)
 		return []string{}, err
 	}
 }
@@ -47,7 +47,7 @@ func (p *PictureFiles) Get(name string) (string, error) {
 		}
 		return "", errors.New("file is not a picture " + p.Path)
 	} else {
-		log.Info("File could not be loaded.", p.Path, err)
-		return "", errors.WithMessage(err, "file could not be loaded "+p.Path)
+		log.Println("File could not be loaded.", p.Path, err)
+		return "", err
 	}
 }
