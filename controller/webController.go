@@ -8,14 +8,14 @@ import (
 )
 
 type WebController struct {
+	staticPath  string
 	galleryPath string
 	webPath     string
 }
 
-const staticPath = "static"
-
-func NewWebController(galleryPath string, webPath string) *WebController {
+func NewWebController(staticPath string, galleryPath string, webPath string) *WebController {
 	wc := WebController{
+		staticPath,
 		galleryPath,
 		webPath,
 	}
@@ -32,7 +32,7 @@ func (wc *WebController) Run(addr string) {
 }
 
 func (wc *WebController) init() error {
-	if err := wc.setupStatic(staticPath); err != nil {
+	if err := wc.setupStatic(wc.staticPath); err != nil {
 		return err
 	}
 
@@ -46,7 +46,9 @@ func (wc *WebController) init() error {
 func (wc *WebController) setupStatic(path string) error {
 	if wc.check(path) {
 		fs := http.FileServer(http.Dir(path))
-		http.Handle("/"+path+"/", http.StripPrefix("/"+path+"/", fs))
+		fullPath := "/" + wc.staticPath + "/" + path + "/"
+
+		http.Handle(fullPath, http.StripPrefix(fullPath, fs))
 		return nil
 	}
 	return errors.New(path + " is not allowed")
