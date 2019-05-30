@@ -73,8 +73,8 @@ func (wc *WebController) setupDynamic() error {
 
 			// serve gallery
 			if wc.check(wc.galleryPath) {
-				pics := entity.PictureFiles{Path: path + "/" + fileInfo.Name()}
-				gallery, err := entity.NewGallery(&pics)
+				pics := entity.NewPicFiles(path, fileInfo.Name())
+				gallery, err := entity.NewGallery(pics)
 
 				if err == nil {
 					http.Handle("/"+fileInfo.Name()+"/", gallery)

@@ -40,9 +40,7 @@ func (f *File) Pictures() ([]string, error) {
 					filtered = append(filtered, fileInfo.Name())
 					file.Close()
 				}
-
 			}
-
 		}
 
 		return filtered, nil

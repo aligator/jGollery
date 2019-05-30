@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/static/style/gallery.css">
+    <title>{{.Name}}</title>
 </head>
 <body>
-{{range .}}
-    <img src="{{.}}" width="300">
+<h1>Gallery {{.Name}}</h1>
+{{range .Pics}}
+    <img src="{{.}}" class="gallery-image">
 {{end}}
 </body>
 </html>

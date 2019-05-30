@@ -7,9 +7,14 @@ import (
 	"net/http"
 )
 
+type GalleryData struct {
+	Name string
+	Pics []string
+}
+
 type Gallery struct {
 	Template
-	Data []string
+	Data GalleryData
 }
 
 func (g *Gallery) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
@@ -46,7 +51,10 @@ func NewGallery(pictures PathGroup) (*Gallery, error) {
 
 	component := &Gallery{
 		Template: *NewTemplate("template", "gallery.html"),
-		Data:     picPaths,
+		Data: GalleryData{
+			pictures.Name(),
+			picPaths,
+		},
 	}
 
 	return component, nil

@@ -21,33 +21,43 @@ type PathGroup interface {
 
 // represents a folder of picture-files
 type PictureFiles struct {
-	Path string
+	name string
+	path string
+}
+
+func NewPicFiles(folder string, name string) *PictureFiles {
+	pf := PictureFiles{
+		name: name,
+		path: folder + "/" + name,
+	}
+
+	return &pf
 }
 
 func (p *PictureFiles) Name() string {
-	return p.Path
+	return p.name
 }
 
 func (p *PictureFiles) GetList() ([]string, error) {
-	if f, err := data.Open(p.Path); err == nil {
+	if f, err := data.Open(p.path); err == nil {
 		defer f.Close()
 		return f.Pictures()
 	} else {
-		log.Println("file could not be loaded.", p.Path, err)
+		log.Println("file could not be loaded.", p.path, err)
 		return []string{}, err
 	}
 }
 
 func (p *PictureFiles) Get(name string) (string, error) {
-	fullPath := p.Path + "/" + name
+	fullPath := p.path + "/" + name
 	if f, err := data.Open(fullPath); err == nil {
 		defer f.Close()
 		if f.IsPicture() {
 			return fullPath, nil
 		}
-		return "", errors.New("file is not a picture " + p.Path)
+		return "", errors.New("file is not a picture " + p.path)
 	} else {
-		log.Println("file could not be loaded", p.Path, err)
+		log.Println("file could not be loaded", p.path, err)
 		return "", err
 	}
 }
