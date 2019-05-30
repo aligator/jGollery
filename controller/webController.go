@@ -59,6 +59,8 @@ func (wc *WebController) setupDynamic() error {
 	path := wc.staticPath + "/" + wc.galleryPath
 
 	file, err := data.Open(path)
+	defer file.Close()
+
 	if err != nil {
 		return err
 	}
