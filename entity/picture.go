@@ -33,7 +33,7 @@ func (p *PictureFiles) GetList() ([]string, error) {
 		defer f.Close()
 		return f.Pictures()
 	} else {
-		log.Println("File could not be loaded.", p.Path, err)
+		log.Println("file could not be loaded.", p.Path, err)
 		return []string{}, err
 	}
 }
@@ -45,9 +45,9 @@ func (p *PictureFiles) Get(name string) (string, error) {
 		if f.IsPicture() {
 			return fullPath, nil
 		}
-		return "", errors.New("File is not a picture " + p.Path)
+		return "", errors.New("file is not a picture " + p.Path)
 	} else {
-		log.Println("File could not be loaded.", p.Path, err)
+		log.Println("file could not be loaded", p.Path, err)
 		return "", err
 	}
 }

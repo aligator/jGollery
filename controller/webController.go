@@ -28,7 +28,7 @@ func NewWebController(staticPath string, galleryPath string, webPath string) *We
 }
 
 func (wc *WebController) Run(addr string) {
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(addr, nil))
 }
 
 func (wc *WebController) init() error {

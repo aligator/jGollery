@@ -31,7 +31,7 @@ func (g *Gallery) RenderTemplate(writer http.ResponseWriter) {
 func NewGallery(pictures PathGroup) (*Gallery, error) {
 	pics, err := pictures.GetList()
 	if err != nil {
-		return nil, errors.Errorf("Could not load gallery %s", pictures.Name())
+		return nil, errors.Errorf("could not load gallery %s", pictures.Name())
 	}
 
 	picPaths := make([]string, len(pics))
