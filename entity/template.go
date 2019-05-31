@@ -48,12 +48,12 @@ func (comp *Template) writeTemplate(writer io.Writer, compData TemplateData) err
 
 // Todo: combine the new Methods, as there is duplicated code
 func NewTemplate(path string, filename string) *Template {
-	fullPath := path + "/" + filename
 	if templ := templates.Lookup(filename); templ != nil {
 		return &Template{
 			templateName: filename,
 		}
 	} else {
+		fullPath := path + "/" + filename
 		template.Must(templates.ParseFiles(fullPath))
 	}
 
