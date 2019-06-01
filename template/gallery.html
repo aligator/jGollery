@@ -8,7 +8,7 @@
 <body>
 <h1>Gallery {{.Name}}</h1>
 {{range .Pics}}
-    <img src="{{.}}" class="gallery-image">
+    <a href="{{.}}"><img src="{{.}}" class="gallery-image"></a>
 {{end}}
 </body>
 </html>
