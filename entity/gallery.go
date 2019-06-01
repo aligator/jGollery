@@ -39,7 +39,7 @@ func NewGallery(pictures PathGroup) (*Gallery, error) {
 		return nil, errors.Errorf("could not load gallery %s", pictures.Name())
 	}
 
-	picPaths := make([]string, len(pics))
+	picPaths := make([]string, 0)
 
 	for _, pic := range pics {
 		if picPath, err := pictures.Get(pic); err == nil {
