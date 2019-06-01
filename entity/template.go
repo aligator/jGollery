@@ -49,25 +49,22 @@ func (comp *Template) writeTemplate(writer io.Writer, compData TemplateData) err
 // Todo: combine the new Methods, as there is duplicated code
 func NewTemplate(path string, filename string) *Template {
 	fullPath := path + "/" + filename
-	if templ := templates.Lookup(filename); templ != nil {
-		return &Template{
-			templateName: filename,
-		}
-	} else {
+	// check if templates already contains the given templateFile
+	if templ := templates.Lookup(filename); templ == nil {
+		// If it doesn't exist, add it to templates by parsing it.
+		// The parsing has to work, else it is not usable and the program cannot work. -> panic
+		// We don't need the result of it here, since it is just a pointer to templates.
 		template.Must(templates.ParseFiles(fullPath))
 	}
 
+	// return new Template containing the name which is used to get it from templates
 	return &Template{
 		templateName: filename,
 	}
 }
 
 func NewDirectTemplate(name string, templStr string) *Template {
-	if templ := templates.Lookup(name); templ != nil {
-		return &Template{
-			templateName: name,
-		}
-	} else {
+	if templ := templates.Lookup(name); templ == nil {
 		template.Must(templates.New(name).Parse(templStr))
 	}
 
