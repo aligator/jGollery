@@ -5,7 +5,7 @@ ADD . /go/src/jGollery
 
 WORKDIR /go/src/jGollery
 
-RUN apk update && apk upgrade && apk add --no-cache git
+RUN apk add git --no-cache
 
 RUN go get -d ./...
 RUN go build -o main ./cmd/jGolleryServer/main.go
